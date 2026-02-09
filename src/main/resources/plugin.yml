@@ -1,0 +1,10 @@
+main: tfmc.justin.surgery
+version: 1.0.0-SNAPSHOT
+name: surgery
+author: Justin
+api-version: 1.21
+
+commands:
+  surgery:
+    description: Opens the surgery menu
+    usage: /surgery
