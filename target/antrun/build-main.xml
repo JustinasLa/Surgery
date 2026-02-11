@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="maven-antrun-" default="main">
-  <target name="main">
-    <copy file="C:\Users\HP\Desktop\plugins\Repositories\Surgery\target/surgery-1.0.0.jar" tofile="C:\Users\HP\Desktop\plugins\surgery\surgery-1.0.0.jar" />
-  </target>
-</project>
