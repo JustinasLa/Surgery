@@ -2,6 +2,7 @@ package tfmc.justin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import tfmc.justin.managers.PluginManager;
+import tfmc.justin.managers.SurgeryItemsConfig;
 import tfmc.justin.managers.SurgeryMenuManager;
 import tfmc.justin.listeners.PlayerListener;
 import tfmc.justin.commands.SurgeryCommand;
@@ -17,7 +18,10 @@ public class surgery extends JavaPlugin {
         
         saveDefaultConfig();
         
-        surgeryMenuManager = new SurgeryMenuManager(this);
+        // Load surgery items config
+        SurgeryItemsConfig itemsConfig = new SurgeryItemsConfig(this);
+        
+        surgeryMenuManager = new SurgeryMenuManager(this, itemsConfig);
         surgeryMenuManager.initialize();
 
         PluginManager.getInstance().initialize();

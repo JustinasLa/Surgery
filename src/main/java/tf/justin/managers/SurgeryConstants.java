@@ -31,24 +31,6 @@ public class SurgeryConstants {
         "Extremely Weak" // RED_CONCRETE
     };
     
-    // Item paths for surgery items
-    public static final String[] SURGERY_ITEMS = {
-        "m.surgery.sponge",          // 0
-        "m.surgery.scalpel",         // 1
-        "m.surgery.stitches",        // 2
-        "m.surgery.antibiotics",     // 3
-        "m.surgery.antiseptic",      // 4
-        "m.surgery.surgical_glove",  // 5
-        "m.surgery.ultrasound",      // 6
-        "m.surgery.lab_kit",         // 7
-        "m.surgery.anesthetic",      // 8
-        "m.surgery.defibrillator",   // 9
-        "m.surgery.pins",            // 10
-        "m.surgery.splint",          // 11
-        "m.surgery.clamp",           // 12
-        "m.surgery.transfusion"      // 13
-    };
-    
     // ==============================================
     // Gets the material color for pulse status
     // ==============================================

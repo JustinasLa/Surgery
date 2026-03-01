@@ -24,6 +24,7 @@ public class SurgeryItemHandler {
     private final SurgeryMechanicsManager mechanicsManager;
     private final SurgeryCompletionHandler completionHandler;
     private final DiagnosisChecker diagnosisChecker;
+    private final SurgeryItemsConfig itemsConfig;
     private final Random random;
     
     // Skill fail message lists
@@ -47,7 +48,8 @@ public class SurgeryItemHandler {
     
     public SurgeryItemHandler(JavaPlugin plugin, ItemAPI api, SurgeryStateManager stateManager, 
                               SurgeryUIUpdater uiUpdater, SurgeryMechanicsManager mechanicsManager,
-                              SurgeryCompletionHandler completionHandler, DiagnosisChecker diagnosisChecker) {
+                              SurgeryCompletionHandler completionHandler, DiagnosisChecker diagnosisChecker,
+                              SurgeryItemsConfig itemsConfig) {
         this.plugin = plugin;
         this.api = api;
         this.stateManager = stateManager;
@@ -55,6 +57,7 @@ public class SurgeryItemHandler {
         this.mechanicsManager = mechanicsManager;
         this.completionHandler = completionHandler;
         this.diagnosisChecker = diagnosisChecker;
+        this.itemsConfig = itemsConfig;
         this.random = new Random();
     }
 
@@ -194,7 +197,7 @@ public class SurgeryItemHandler {
             return getRandomSkillFail(skillFailLabKit);
         } else {
             menu.setItem(37, null);
-            ItemStack antibiotics = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[3]);
+            ItemStack antibiotics = api.getCreator().getItemFromPath(itemsConfig.getItemPath(3));
             if (antibiotics != null) {
                 menu.setItem(31, antibiotics);
             }

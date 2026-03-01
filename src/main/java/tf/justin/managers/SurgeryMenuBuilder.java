@@ -21,13 +21,15 @@ public class SurgeryMenuBuilder {
     private final ItemAPI api;
     private final SurgeryStateManager stateManager;
     private final SurgeryUIUpdater uiUpdater;
+    private final SurgeryItemsConfig itemsConfig;
     private final Random random;
     
-    public SurgeryMenuBuilder(JavaPlugin plugin, ItemAPI api, SurgeryStateManager stateManager, SurgeryUIUpdater uiUpdater) {
+    public SurgeryMenuBuilder(JavaPlugin plugin, ItemAPI api, SurgeryStateManager stateManager, SurgeryUIUpdater uiUpdater, SurgeryItemsConfig itemsConfig) {
         this.plugin = plugin;
         this.api = api;
         this.stateManager = stateManager;
         this.uiUpdater = uiUpdater;
+        this.itemsConfig = itemsConfig;
         this.random = new Random();
     }
     
@@ -63,12 +65,13 @@ public class SurgeryMenuBuilder {
             int slot = mapping[0];
             int itemIndex = mapping[1];
             
-            if (itemIndex < SurgeryConstants.SURGERY_ITEMS.length) {
-                ItemStack item = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[itemIndex]);
+            String itemPath = itemsConfig.getItemPath(itemIndex);
+            if (itemPath != null) {
+                ItemStack item = api.getCreator().getItemFromPath(itemPath);
                 if (item != null) {
                     menu.setItem(slot, item);
                 } else {
-                    plugin.getLogger().warning("[Surgery] Could not load item: " + SurgeryConstants.SURGERY_ITEMS[itemIndex]);
+                    plugin.getLogger().warning("[Surgery] Could not load item: " + itemPath);
                 }
             }
         }

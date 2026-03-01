@@ -22,6 +22,7 @@ public class SurgeryMechanicsManager {
     private final SurgeryUIUpdater uiUpdater;
     private final SurgeryCompletionHandler completionHandler;
     private final DiagnosisChecker diagnosisChecker;
+    private final SurgeryItemsConfig itemsConfig;
     private final Random random;
     
     // Map diagnoses to required incision counts
@@ -29,13 +30,14 @@ public class SurgeryMechanicsManager {
     
     public SurgeryMechanicsManager(JavaPlugin plugin, ItemAPI api, SurgeryStateManager stateManager,
                                    SurgeryUIUpdater uiUpdater, SurgeryCompletionHandler completionHandler,
-                                   DiagnosisChecker diagnosisChecker) {
+                                   DiagnosisChecker diagnosisChecker, SurgeryItemsConfig itemsConfig) {
         this.plugin = plugin;
         this.api = api;
         this.stateManager = stateManager;
         this.uiUpdater = uiUpdater;
         this.completionHandler = completionHandler;
         this.diagnosisChecker = diagnosisChecker;
+        this.itemsConfig = itemsConfig;
         this.random = new Random();
     }
     
@@ -286,7 +288,7 @@ public class SurgeryMechanicsManager {
             double currentTemp = stateManager.getTemperature(playerId);
             double normalTemp = plugin.getConfig().getDouble("temperature.normal", 98.6);
             if (Math.abs(currentTemp - normalTemp) < 0.1) {
-                ItemStack surgicalGlove = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[5]);
+                ItemStack surgicalGlove = api.getCreator().getItemFromPath(itemsConfig.getItemPath(5));
                 if (surgicalGlove != null) {
                     menu.setItem(33, surgicalGlove);
                     uiUpdater.sendNumberedMessage(player, uiUpdater.getMessage("surgical-glove-ready"));
@@ -308,7 +310,7 @@ public class SurgeryMechanicsManager {
                     }
                 }
                 
-                ItemStack surgicalGlove = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[5]);
+                ItemStack surgicalGlove = api.getCreator().getItemFromPath(itemsConfig.getItemPath(5));
                 if (surgicalGlove != null) {
                     menu.setItem(33, surgicalGlove);
                     uiUpdater.sendNumberedMessage(player, uiUpdater.getMessage("surgical-glove-ready"));
@@ -366,7 +368,7 @@ public class SurgeryMechanicsManager {
         // Defibrillator: appears when heart stopped
         String status = stateManager.getStatus(playerId);
         if (status.equals("Heart Stopped") && menu.getItem(39) == null) {
-            ItemStack defibrillator = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[9]);
+            ItemStack defibrillator = api.getCreator().getItemFromPath(itemsConfig.getItemPath(9));
             if (defibrillator != null) {
                 menu.setItem(39, defibrillator);
                 uiUpdater.sendNumberedMessage(player, uiUpdater.getMessage("defibrillator-available"));
@@ -378,7 +380,7 @@ public class SurgeryMechanicsManager {
         // Pins: appears when shattered bones revealed
         int revealedShattered = stateManager.getRevealedShatteredBones(playerId);
         if (revealedShattered > 0 && menu.getItem(40) == null) {
-            ItemStack pins = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[10]);
+            ItemStack pins = api.getCreator().getItemFromPath(itemsConfig.getItemPath(10));
             if (pins != null) {
                 menu.setItem(40, pins);
                 uiUpdater.sendNumberedMessage(player, uiUpdater.getMessage("pins-available"));
@@ -390,7 +392,7 @@ public class SurgeryMechanicsManager {
         // Splint: appears when broken bones revealed
         int revealedBroken = stateManager.getRevealedBrokenBones(playerId);
         if (revealedBroken > 0 && menu.getItem(41) == null) {
-            ItemStack splint = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[11]);
+            ItemStack splint = api.getCreator().getItemFromPath(itemsConfig.getItemPath(11));
             if (splint != null) {
                 menu.setItem(41, splint);
                 uiUpdater.sendNumberedMessage(player, uiUpdater.getMessage("splint-available"));
@@ -403,7 +405,7 @@ public class SurgeryMechanicsManager {
         int incisions = stateManager.getIncisions(playerId);
         boolean bleeding = stateManager.isBleeding(playerId);
         if (incisions > 1 && bleeding && menu.getItem(42) == null) {
-            ItemStack clamp = api.getCreator().getItemFromPath(SurgeryConstants.SURGERY_ITEMS[12]);
+            ItemStack clamp = api.getCreator().getItemFromPath(itemsConfig.getItemPath(12));
             if (clamp != null) {
                 menu.setItem(42, clamp);
                 uiUpdater.sendNumberedMessage(player, uiUpdater.getMessage("clamp-available"));

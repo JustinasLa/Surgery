@@ -1,0 +1,18 @@
+# Surgery Items Configuration
+# Configure the TLibs item paths for all surgery tools
+
+items:
+  sponge: "m.surgery.sponge"
+  scalpel: "m.surgery.scalpel"
+  stitches: "m.surgery.stitches"
+  antibiotics: "m.surgery.antibiotics"
+  antiseptic: "m.surgery.antiseptic"
+  surgical-glove: "m.surgery.surgical_glove"
+  ultrasound: "m.surgery.ultrasound"
+  lab-kit: "m.surgery.lab_kit"
+  anesthetic: "m.surgery.anesthetic"
+  defibrillator: "m.surgery.defibrillator"
+  pins: "m.surgery.pins"
+  splint: "m.surgery.splint"
+  clamp: "m.surgery.clamp"
+  transfusion: "m.surgery.transfusion"

@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class SurgeryMenuManager {
     
     private final JavaPlugin plugin;
+    private final SurgeryItemsConfig itemsConfig;
     private ItemAPI api;
     
     // Specialized managers
@@ -25,8 +26,9 @@ public class SurgeryMenuManager {
     private SurgeryItemHandler itemHandler;
     private SurgeryMechanicsManager mechanicsManager;
     
-    public SurgeryMenuManager(JavaPlugin plugin) {
+    public SurgeryMenuManager(JavaPlugin plugin, SurgeryItemsConfig itemsConfig) {
         this.plugin = plugin;
+        this.itemsConfig = itemsConfig;
     }
     
     // ==============================================
@@ -41,9 +43,9 @@ public class SurgeryMenuManager {
         stateManager = new SurgeryStateManager();
         uiUpdater = new SurgeryUIUpdater(plugin, stateManager, diagnosisChecker);
         completionHandler = new SurgeryCompletionHandler(plugin, stateManager, uiUpdater);
-        mechanicsManager = new SurgeryMechanicsManager(plugin, api, stateManager, uiUpdater, completionHandler, diagnosisChecker);
-        menuBuilder = new SurgeryMenuBuilder(plugin, api, stateManager, uiUpdater);
-        itemHandler = new SurgeryItemHandler(plugin, api, stateManager, uiUpdater, mechanicsManager, completionHandler, diagnosisChecker);
+        mechanicsManager = new SurgeryMechanicsManager(plugin, api, stateManager, uiUpdater, completionHandler, diagnosisChecker, itemsConfig);
+        menuBuilder = new SurgeryMenuBuilder(plugin, api, stateManager, uiUpdater, itemsConfig);
+        itemHandler = new SurgeryItemHandler(plugin, api, stateManager, uiUpdater, mechanicsManager, completionHandler, diagnosisChecker, itemsConfig);
         
         // Initialize any managers that need config
         mechanicsManager.initialize();
